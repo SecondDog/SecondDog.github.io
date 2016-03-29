@@ -57,31 +57,28 @@
 
 
 
-<meta name="description" content="github配置github提供了pages功能。能够生成属于你自己的站点。登录自己的github，新建一个仓库，仓库的名字必须和你的github用户名一致
-生成好自己的仓库以后，clone到本地
-git clone https://github.com/username/username.github.io
-进入仓库生成index.html
-#进入你的仓库
-cd username.github.">
+<meta name="description" content="###如何配置自己的gihub.io的域名指向。进入用hexo生成的本地my_blog_name文件夹
+#进入我的博客目录cd my_blog_name
+#进入source文件夹cd source
+#新建CNAME文件vi CNAME编辑CNAME文件 在CNAME文件里插入你要指向的域名，注意域名不要带http www等例如我的CNAME文件内容就是 cocoa1024.com
+域名注册以下是几">
 <meta property="og:type" content="article">
-<meta property="og:title" content="基于github.io和hexo搭建技术博客">
-<meta property="og:url" content="http://yoursite.com/2016/03/28/hello-world/index.html">
+<meta property="og:title" content="github.io域名指向">
+<meta property="og:url" content="http://yoursite.com/2016/03/29/cname-githubio/index.html">
 <meta property="og:site_name" content="自玉的博客">
-<meta property="og:description" content="github配置github提供了pages功能。能够生成属于你自己的站点。登录自己的github，新建一个仓库，仓库的名字必须和你的github用户名一致
-生成好自己的仓库以后，clone到本地
-git clone https://github.com/username/username.github.io
-进入仓库生成index.html
-#进入你的仓库
-cd username.github.">
-<meta property="og:updated_time" content="2016-03-29T06:25:38.000Z">
+<meta property="og:description" content="###如何配置自己的gihub.io的域名指向。进入用hexo生成的本地my_blog_name文件夹
+#进入我的博客目录cd my_blog_name
+#进入source文件夹cd source
+#新建CNAME文件vi CNAME编辑CNAME文件 在CNAME文件里插入你要指向的域名，注意域名不要带http www等例如我的CNAME文件内容就是 cocoa1024.com
+域名注册以下是几">
+<meta property="og:updated_time" content="2016-03-29T07:43:15.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="基于github.io和hexo搭建技术博客">
-<meta name="twitter:description" content="github配置github提供了pages功能。能够生成属于你自己的站点。登录自己的github，新建一个仓库，仓库的名字必须和你的github用户名一致
-生成好自己的仓库以后，clone到本地
-git clone https://github.com/username/username.github.io
-进入仓库生成index.html
-#进入你的仓库
-cd username.github.">
+<meta name="twitter:title" content="github.io域名指向">
+<meta name="twitter:description" content="###如何配置自己的gihub.io的域名指向。进入用hexo生成的本地my_blog_name文件夹
+#进入我的博客目录cd my_blog_name
+#进入source文件夹cd source
+#新建CNAME文件vi CNAME编辑CNAME文件 在CNAME文件里插入你要指向的域名，注意域名不要带http www等例如我的CNAME文件内容就是 cocoa1024.com
+域名注册以下是几">
 
 
 
@@ -99,7 +96,7 @@ cd username.github.">
   };
 </script>
 
-  <title> 基于github.io和hexo搭建技术博客 | 自玉的博客 </title>
+  <title> github.io域名指向 | 自玉的博客 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -219,7 +216,7 @@ cd username.github.">
             
             
               
-                基于github.io和hexo搭建技术博客
+                github.io域名指向
               
             
           </h1>
@@ -231,8 +228,8 @@ cd username.github.">
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-03-28T17:11:23+08:00" content="2016-03-28">
-              2016-03-28
+            <time itemprop="dateCreated" datetime="2016-03-29T15:02:59+08:00" content="2016-03-29">
+              2016-03-29
             </time>
           </span>
 
@@ -258,41 +255,23 @@ cd username.github.">
       
 
       
-        <h2 id="github配置"><a href="#github配置" class="headerlink" title="github配置"></a>github配置</h2><p>github提供了<a href="https://pages.github.com/" target="_blank" rel="external">pages</a>功能。能够生成属于你自己的站点。<br>登录自己的github，新建一个仓库，仓库的名字必须和你的github用户名一致</p>
-<p>生成好自己的仓库以后，clone到本地</p>
-<pre><code>git clone https://github.com/username/username.github.io</code></pre>
-进入仓库生成index.html
-<pre><code>#进入你的仓库
-cd username.github.io
-#生成index.html
-echo "Hello World" > index.html
-</code></pre>
-提交并推送到远端
-<pre><code>#add 到本地仓库
-git add --all
-#提交到本地仓库
-git commit -m "Initial commit"
-#推送到远程仓库
-git push -u origin master
-</code></pre>
-
-<p>这时候去访问<a href="http://your_username.github.io" target="_blank" rel="external">http://your_username.github.io</a> 你的站点主页生成好了。虽然只有一个hello world。</p>
-<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><p>有了站点，可我不会js怎么办。没关系有Hexo。hexo会为你自动生成博客目录，你只需要关注其中的博客内容就可以了。类似的工具还有octopress，wordpress等。这里选用Hexo因为相比其他几种工具配置相对容易。目录结构清晰。<br>安装Hexo需要Node.js环境 所以先去<a href="https://nodejs.org/en/" target="_blank" rel="external">官网下载安装包</a>，pkg文件。<br>安装完成之后，安装hexo。</p>
-<pre><code>#安装hexo工具
-npm install -g hexo
-</code></pre>
-
-<h3 id="Hexo的配置与使用"><a href="#Hexo的配置与使用" class="headerlink" title="Hexo的配置与使用"></a>Hexo的配置与使用</h3><p>先生成一个博客</p>
-<pre><code>#生成博客
-hexo init my_blog_name
-</code></pre>
-
-<p>hexo会自动为你创建一个名为my_blog_name的文件夹，里面就包含你的博客框架。<br>进入my_blog_name/source/_posts里面会有一个默认的hellowrold.md。这个就是hexo为你生成的博客内容，用markdown编辑器打开 随便编辑一下。<br>然后在本地启动server，预览</p>
-<p><pre><code>#生成博客<br>hexo generate<br>启动本地服务器<br>hexo server<br></code></pre><br>这时在浏览器里输入localhost:4000就可以看到你的博客页面了，hexo已经为你加载好了默认的landscape主题，很漂亮吧，很有成就感吧。</p>
-<h3 id="Hexo关联github"><a href="#Hexo关联github" class="headerlink" title="Hexo关联github"></a>Hexo关联github</h3><p>进入刚刚生成的my_blog_name文件夹 打开_config.yml。这是hexo的配置文件，这里包括了你的基础信息等等，暂时不关心。直接翻到最下边找到deploy:并编辑</p>
-<p><pre><code>deploy:<br>  type: git<br>  repository: git@github.com:SecondDog/SecondDog.github.io.git<br>  branch: master<br></code></pre><br>注意编辑的时候一定要注意半角的冒号和他后边的空格，不然会导致没法解析。<br>编辑保存之后进入my_blog_name文件夹，</p>
-<p><pre><code>hexo deploy</code></pre><br>这是你的hexo就会自动生成的my_logo_name项目推送到你的<br><a href="https://github.com/username/username.github.io仓库中，去浏览器里输入访问http://your_username.github.io。就会发现Hexo项目已经和github.io产生了关联。" target="_blank" rel="external">https://github.com/username/username.github.io仓库中，去浏览器里输入访问http://your_username.github.io。就会发现Hexo项目已经和github.io产生了关联。</a></p>
-<p>—eof—</p>
+        <p>###如何配置自己的gihub.io的域名指向。<br>进入用hexo生成的本地my_blog_name文件夹</p>
+<p><pre><code>#进入我的博客目录<br>cd my_blog_name</code></pre></p>
+<p><pre><code>#进入source文件夹<br>cd source</code></pre></p>
+<p><pre><code>#新建CNAME文件<br>vi CNAME</code></pre><br>编辑CNAME文件 在CNAME文件里插入你要指向的域名，注意域名不要带http www等<br>例如我的CNAME文件内容就是 cocoa1024.com</p>
+<h3 id="域名注册"><a href="#域名注册" class="headerlink" title="域名注册"></a>域名注册</h3><p>以下是几个域名服务提供商，随便选一个点进去去注册就好了</p>
+<ul>
+<li><a href="https://wanwang.aliyun.com/domain/" target="_blank" rel="external">万网</a></li>
+<li><a href="https://wanwang.aliyun.com/domain/" target="_blank" rel="external">万网</a></li>
+<li><a href="https://wanwang.aliyun.com/domain/" target="_blank" rel="external">万网</a></li>
+<li><a href="https://wanwang.aliyun.com/domain/" target="_blank" rel="external">万网</a></li>
+</ul>
+<p>####tips:<br>尽量不要选择.cn域名，因为需要备案，如果个人用户可以选择注册最近比较火的.me域名，一看后缀就知道很适合做个人网站，比如著名的iOS开发者Mattt大神的个人网站就是<a href="mattt.me">mattt.me</a></p>
+<p>.me域名里有很多有趣的域名都被注册了比如：about.me,kiss.me,还有fuck(和谐).me，五个字符以内的短域名已经基本都被抢注了，如果做iOS开发者的技术博客的话，建议可以用如下关键字去注册，cocoa，framewrok，iosDev，applefun等，例如我的博客域名就是cocoa1024.com顺便致敬一下你懂的那个社区<br>当然你也可以给你的偶像致敬，你爱的人，或者几分戏谑的挑逗一下巨头们，比如你可以叫hardsoft，去对抗微软什么的。当然你也可以很贱的叫localhost8080（这个域名已经被注册了）.这些都没人管，只要你喜欢，当然你还得有点￥RMB或者$dollar。如果你没钱，乖乖的选个便宜的吧。</p>
+<h3 id="DNS解析"><a href="#DNS解析" class="headerlink" title="DNS解析"></a>DNS解析</h3><p>去你的域名提供商的主页或者<a href="https://www.dnspod.cn/" target="_blank" rel="external">dnspod</a>去解析域名吧。<br>打开对应的后台，添加你的域名，并且给你的域名添加两条A记录，一条@，一条www 这样保证无论是通过www.yourdomain.com或者直接访问yourdomain.com的方式都可以直接访问到你的页面。</p>
+<p>####tips:<br>如果你不知道你的github.io的ip，那么打开终端，ping yourname.github.io<br>control+c结束，把获取到的ip填到A记录对应字段里就OK了</p>
+<p>做完以上步骤之后，你只需要等待，域名解析服务会把对你域名解析推到全球，一般会是10分钟-72小时生效不等。这样你通过你的域名就可以访问你自己的主页了。听起来是不是很兴奋呢？！</p>
+<p>—–eof—–</p>
 
       
     </div>
@@ -310,13 +289,13 @@ hexo init my_blog_name
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2016/03/28/hello-world/" rel="next" title="基于github.io和hexo搭建技术博客">
+                <i class="fa fa-chevron-left"></i> 基于github.io和hexo搭建技术博客
+              </a>
+            
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/03/29/cname-githubio/" rel="prev" title="github.io域名指向">
-                github.io域名指向 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -421,7 +400,7 @@ hexo init my_blog_name
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#github配置"><span class="nav-number">1.</span> <span class="nav-text">github配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo"><span class="nav-number">2.</span> <span class="nav-text">Hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo的配置与使用"><span class="nav-number">2.1.</span> <span class="nav-text">Hexo的配置与使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo关联github"><span class="nav-number">2.2.</span> <span class="nav-text">Hexo关联github</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#域名注册"><span class="nav-number">1.</span> <span class="nav-text">域名注册</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DNS解析"><span class="nav-number">2.</span> <span class="nav-text">DNS解析</span></a></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
