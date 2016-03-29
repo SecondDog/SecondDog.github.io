@@ -57,16 +57,31 @@
 
 
 
-<meta name="description" content="这是描述">
+<meta name="description" content="github配置github提供了pages功能。能够生成属于你自己的站点。登录自己的github，新建一个仓库，仓库的名字必须和你的github用户名一致
+生成好自己的仓库以后，clone到本地
+git clone https://github.com/username/username.github.io
+进入仓库生成index.html
+#进入你的仓库
+cd username.github.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于github.io和hexo搭建技术博客">
 <meta property="og:url" content="http://yoursite.com/2016/03/28/hello-world/index.html">
 <meta property="og:site_name" content="自玉的博客">
-<meta property="og:description" content="这是描述">
-<meta property="og:updated_time" content="2016-03-29T02:45:22.000Z">
+<meta property="og:description" content="github配置github提供了pages功能。能够生成属于你自己的站点。登录自己的github，新建一个仓库，仓库的名字必须和你的github用户名一致
+生成好自己的仓库以后，clone到本地
+git clone https://github.com/username/username.github.io
+进入仓库生成index.html
+#进入你的仓库
+cd username.github.">
+<meta property="og:updated_time" content="2016-03-29T06:23:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于github.io和hexo搭建技术博客">
-<meta name="twitter:description" content="这是描述">
+<meta name="twitter:description" content="github配置github提供了pages功能。能够生成属于你自己的站点。登录自己的github，新建一个仓库，仓库的名字必须和你的github用户名一致
+生成好自己的仓库以后，clone到本地
+git clone https://github.com/username/username.github.io
+进入仓库生成index.html
+#进入你的仓库
+cd username.github.">
 
 
 
@@ -243,7 +258,42 @@
       
 
       
-        
+        <h2 id="github配置"><a href="#github配置" class="headerlink" title="github配置"></a>github配置</h2><p>github提供了<a href="https://pages.github.com/" target="_blank" rel="external">pages</a>功能。能够生成属于你自己的站点。<br>登录自己的github，新建一个仓库，仓库的名字必须和你的github用户名一致</p>
+<p>生成好自己的仓库以后，clone到本地</p>
+<pre><code>git clone https://github.com/username/username.github.io</code></pre>
+进入仓库生成index.html
+<pre><code>#进入你的仓库
+cd username.github.io
+#生成index.html
+echo "Hello World" > index.html
+</code></pre>
+提交并推送到远端
+<pre><code>#add 到本地仓库
+git add --all
+#提交到本地仓库
+git commit -m "Initial commit"
+#推送到远程仓库
+git push -u origin master
+</code></pre>
+
+<p>这时候去访问<a href="http://your_username.github.io" target="_blank" rel="external">http://your_username.github.io</a> 你的站点主页生成好了。虽然只有一个hello world。</p>
+<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><p>有了站点，可我不会js怎么办。没关系有Hexo。hexo会为你自动生成博客目录，你只需要关注其中的博客内容就可以了。类似的工具还有octopress，wordpress等。这里选用Hexo因为相比其他几种工具配置相对容易。目录结构清晰。<br>安装Hexo需要Node.js环境 所以先去<a href="https://nodejs.org/en/" target="_blank" rel="external">官网下载安装包</a>，pkg文件。<br>安装完成之后，安装hexo。</p>
+<pre><code>#安装hexo工具
+npm install -g hexo
+</code></pre>
+
+<h3 id="Hexo的配置与使用"><a href="#Hexo的配置与使用" class="headerlink" title="Hexo的配置与使用"></a>Hexo的配置与使用</h3><p>先生成一个博客</p>
+<pre><code>#生成博客
+hexo init my_blog_name
+</code></pre>
+
+<p>hexo会自动为你创建一个名为my_blog_name的文件夹，里面就包含你的博客框架。<br>进入my_blog_name/source/_posts里面会有一个默认的hellowrold.md。这个就是hexo为你生成的博客内容，用markdown编辑器打开 随便编辑一下。<br>然后在本地启动server，预览</p>
+<p><pre><code>#生成博客<br>hexo generate<br>启动本地服务器<br>hexo server<br></code></pre><br>这时在浏览器里输入localhost:4000就可以看到你的博客页面了，hexo已经为你加载好了默认的landscape主题，很漂亮吧，很有成就感吧。</p>
+<h3 id="Hexo关联github"><a href="#Hexo关联github" class="headerlink" title="Hexo关联github"></a>Hexo关联github</h3><p>进入刚刚生成的my_blog_name文件夹 打开_config.yml。这是hexo的配置文件，这里包括了你的基础信息等等，暂时不关心。直接翻到最下边找到deploy:并编辑</p>
+<p><pre><code>deploy:<br>  type: git<br>  repository: git@github.com:SecondDog/SecondDog.github.io.git<br>  branch: master<br></code></pre><br>注意编辑的时候一定要注意半角的冒号和他后边的空格，不然会导致没法解析。<br>编辑保存之后进入my_blog_name文件夹，</p>
+<p><pre><code>hexo deploy</code></pre><br>这是你的hexo就会自动生成的my_logo_name项目推送到你的<br><a href="https://github.com/username/username.github.io仓库中，去浏览器里输入访问http://your_username.github.io。就会发现Hexo项目已经和github.io产生了关联。" target="_blank" rel="external">https://github.com/username/username.github.io仓库中，去浏览器里输入访问http://your_username.github.io。就会发现Hexo项目已经和github.io产生了关联。</a></p>
+<p>—eof—</p>
+
       
     </div>
 
@@ -357,7 +407,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#github配置"><span class="nav-number">1.</span> <span class="nav-text">github配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Hexo"><span class="nav-number">2.</span> <span class="nav-text">Hexo</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo的配置与使用"><span class="nav-number">2.1.</span> <span class="nav-text">Hexo的配置与使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo关联github"><span class="nav-number">2.2.</span> <span class="nav-text">Hexo关联github</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
