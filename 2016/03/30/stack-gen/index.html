@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Show me the code</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="title:OC数据结构（一）：栈的生成概述栈（stack）作为数据结构里的最基础，最简单，最经典的模型，从我们一上学开始就被一再提起。C++的STL更是把栈作为一种基础的模板直接封装在其框架之内了，java语言也有StackUtil。但是OC中没有关于栈的容器，所以我实现了NSStack类，内部包装一个数组作为容器。初始化的时候初始化内部的数组，入栈就是在数组末尾添加元素，出栈就是从获取数组的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Show me the code">
+<meta property="og:url" content="http://yoursite.com/2016/03/30/stack-gen/index.html">
+<meta property="og:site_name" content="Show me the code">
+<meta property="og:description" content="title:OC数据结构（一）：栈的生成概述栈（stack）作为数据结构里的最基础，最简单，最经典的模型，从我们一上学开始就被一再提起。C++的STL更是把栈作为一种基础的模板直接封装在其框架之内了，java语言也有StackUtil。但是OC中没有关于栈的容器，所以我实现了NSStack类，内部包装一个数组作为容器。初始化的时候初始化内部的数组，入栈就是在数组末尾添加元素，出栈就是从获取数组的">
+<meta property="og:updated_time" content="2016-03-30T06:18:03.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Show me the code">
+<meta name="twitter:description" content="title:OC数据结构（一）：栈的生成概述栈（stack）作为数据结构里的最基础，最简单，最经典的模型，从我们一上学开始就被一再提起。C++的STL更是把栈作为一种基础的模板直接封装在其框架之内了，java语言也有StackUtil。但是OC中没有关于栈的容器，所以我实现了NSStack类，内部包装一个数组作为容器。初始化的时候初始化内部的数组，入栈就是在数组末尾添加元素，出栈就是从获取数组的">
+  
+    <link rel="alternate" href="/atom.xml" title="Show me the code" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Show me the code</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">这是subtitle</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-stack-gen" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/30/stack-gen/" class="article-date">
+  <time datetime="2016-03-30T05:38:40.000Z" itemprop="datePublished">2016-03-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <hr>
+<h2 id="title-OC数据结构（一）：栈的生成"><a href="#title-OC数据结构（一）：栈的生成" class="headerlink" title="title:OC数据结构（一）：栈的生成"></a>title:OC数据结构（一）：栈的生成</h2><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>栈（stack）作为数据结构里的最基础，最简单，最经典的模型，从我们一上学开始就被一再提起。C++的STL更是把栈作为一种基础的模板直接封装在其框架之内了，java语言也有StackUtil。但是OC中没有关于栈的容器，所以我实现了NSStack类，内部包装一个数组作为容器。初始化的时候初始化内部的数组，入栈就是在数组末尾添加元素，出栈就是从获取数组的最后一个元素，栈空就是数组count为0 下面是栈的行为定义<br><a id="more"></a></p>
+<ul>
+<li>初始化</li>
+<li>入栈</li>
+<li>出栈</li>
+<li>获取栈顶第一个元素</li>
+<li>判断栈满</li>
+<li>判断栈空</li>
+</ul>
+<h2 id="栈的头文件"><a href="#栈的头文件" class="headerlink" title="栈的头文件"></a>栈的头文件</h2><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSStack</span> : <span class="title">NSObject</span></span></span><br><span class="line">-(instancetype)init;<span class="comment">//初始化 默认名字com.nsstack.default 默认大小100</span></span><br><span class="line">-(instancetype)initWithName:(<span class="built_in">NSString</span>*)name WithSize:(<span class="built_in">NSUInteger</span>)size;</span><br><span class="line">-(<span class="built_in">BOOL</span>)inStack:(<span class="keyword">id</span>)obj;<span class="comment">//入栈</span></span><br><span class="line">-(<span class="keyword">id</span>)outStack:(<span class="built_in">BOOL</span>*)success;<span class="comment">//出栈</span></span><br><span class="line">-(<span class="keyword">id</span>)peek:(<span class="built_in">BOOL</span>*)success;<span class="comment">//读取栈顶元素</span></span><br><span class="line">-(<span class="built_in">BOOL</span>)isEmpty;<span class="comment">//栈是否为空</span></span><br><span class="line">-(<span class="built_in">NSInteger</span>)size;<span class="comment">//当前栈的大小</span></span><br><span class="line">-(<span class="built_in">NSString</span>*)stackName;<span class="comment">//栈的名称</span></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<h2 id="栈的实现"><a href="#栈的实现" class="headerlink" title="栈的实现"></a>栈的实现</h2><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">NSStack</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">NSInteger</span> _maxSize;</span><br><span class="line">    <span class="built_in">NSString</span> * _stackName;</span><br><span class="line">    <span class="built_in">NSMutableArray</span> * _internalArray;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">NSStack</span></span></span><br><span class="line">-(instancetype)init</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="keyword">self</span> initWithName:<span class="string">@"com.nsstack.default"</span> WithSize:<span class="number">100</span>];</span><br><span class="line">&#125;</span><br><span class="line">-(instancetype)initWithName:(<span class="built_in">NSString</span>*)name WithSize:(<span class="built_in">NSUInteger</span>)psize;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span>=[<span class="keyword">super</span> init];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">        _stackName=name;</span><br><span class="line">        _maxSize=psize;</span><br><span class="line">        _internalArray = [[<span class="built_in">NSMutableArray</span> alloc]init];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line">-(<span class="built_in">BOOL</span>)inStack:(<span class="keyword">id</span>)obj</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (obj==<span class="literal">nil</span>||_internalArray.count+<span class="number">1</span>&gt;_maxSize) &#123;</span><br><span class="line">        <span class="keyword">if</span> (obj==<span class="literal">nil</span>) &#123;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (_internalArray.count+<span class="number">1</span>&gt;_maxSize) &#123;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NO</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    [_internalArray addObject:obj];</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br><span class="line">-(<span class="keyword">id</span>)outStack:(<span class="built_in">BOOL</span>*)success</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> ([<span class="keyword">self</span> isEmpty]) &#123;</span><br><span class="line">        *success=<span class="literal">NO</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    *success = <span class="literal">YES</span>;</span><br><span class="line">    <span class="built_in">NSObject</span> * obj = [_internalArray lastObject];</span><br><span class="line">    [_internalArray removeObjectAtIndex:_internalArray.count<span class="number">-1</span>];</span><br><span class="line">    <span class="keyword">return</span> obj;</span><br><span class="line">&#125;</span><br><span class="line">-(<span class="keyword">id</span>)peek:(<span class="built_in">BOOL</span>*)success</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> ([<span class="keyword">self</span> isEmpty]) &#123;</span><br><span class="line">        *success=<span class="literal">NO</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">nil</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">NSObject</span> * obj = [_internalArray lastObject];</span><br><span class="line">    <span class="keyword">return</span> obj;</span><br><span class="line">&#125;</span><br><span class="line">-(<span class="built_in">BOOL</span>)isEmpty</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> _internalArray.count==<span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line">-(<span class="built_in">NSInteger</span>)size</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> _internalArray.count;</span><br><span class="line">&#125;</span><br><span class="line">-(<span class="built_in">NSString</span> *)description</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> [<span class="built_in">NSString</span> stringWithFormat:<span class="string">@"当前栈名称:%@,大小%ld,最大容量%ld"</span>,_stackName,_internalArray.count,_maxSize];</span><br><span class="line">&#125;</span><br><span class="line">-(<span class="built_in">NSString</span> *)stackName</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> _stackName;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="测试用例"><a href="#测试用例" class="headerlink" title="测试用例"></a>测试用例</h2><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">-(<span class="keyword">void</span>)testStack</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">#define PRE_DEFINE_STACK_SIZE 100 //stack size</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">//init the stack</span></span><br><span class="line">    <span class="built_in">NSStack</span> * stackToBeTest = [[<span class="built_in">NSStack</span> alloc]initWithName:<span class="string">@"testStack"</span> WithSize:PRE_DEFINE_STACK_SIZE];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//init obj of different types</span></span><br><span class="line">    <span class="built_in">NSString</span>     * testStringObject     = <span class="string">@"testString"</span>;</span><br><span class="line">    <span class="built_in">NSNumber</span>     * testNumberObject     = @(<span class="number">12306</span>);</span><br><span class="line">    <span class="built_in">NSData</span>       * testDataObject       = [<span class="built_in">NSData</span> dataWithBytes:<span class="string">"data"</span> length:<span class="number">4</span>];</span><br><span class="line">    <span class="built_in">NSDate</span>       * testDateObject       = [<span class="built_in">NSDate</span> date];</span><br><span class="line">    <span class="built_in">NSArray</span>      * testArrayObject      = @[<span class="string">@"index1"</span>,<span class="string">@"index2"</span>,<span class="string">@"index3"</span>];</span><br><span class="line">    <span class="built_in">NSDictionary</span> * testDictionaryObject = @&#123;<span class="string">@"key1"</span>:<span class="string">@"value1"</span>,<span class="string">@"key2"</span>:<span class="string">@"value2"</span>&#125;;</span><br><span class="line">    <span class="built_in">NSArray</span>      * vector               = @[testStringObject,</span><br><span class="line">                                            testNumberObject,</span><br><span class="line">                                            testDataObject,</span><br><span class="line">                                            testDateObject,</span><br><span class="line">                                            testArrayObject,</span><br><span class="line">                                            testDictionaryObject];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//test instack an outstack logic</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">NSInteger</span> i=<span class="number">0</span>; i&lt;<span class="number">100</span>; i++) &#123;</span><br><span class="line">        <span class="keyword">if</span> ([stackToBeTest inStack:@(i)]) &#123;</span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"instack success %@"</span>,@(i));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">NSInteger</span> i=<span class="number">0</span>; i&lt;<span class="number">100</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">BOOL</span> outstackSuccess;</span><br><span class="line">        <span class="keyword">id</span> obj = [stackToBeTest outStack:&amp;outstackSuccess];</span><br><span class="line">        <span class="keyword">if</span> (outstackSuccess) &#123;</span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"out stack success %@"</span>,obj);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//test make a full stack with different type of object</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">NSInteger</span> i=<span class="number">0</span>; i&lt;PRE_DEFINE_STACK_SIZE; i++) &#123;</span><br><span class="line">        <span class="built_in">NSObject</span> * randomOBJ = [vector objectAtIndex:(arc4random()%vector.count)];</span><br><span class="line">        <span class="built_in">BOOL</span> inStackSuccess =[stackToBeTest inStack:[randomOBJ <span class="keyword">copy</span>]];</span><br><span class="line">        <span class="built_in">NSString</span> * status = inStackSuccess?<span class="string">@"success"</span>:<span class="string">@"fail"</span>;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"inStack:%@,object:【%@】%@"</span>,status,<span class="built_in">NSStringFromClass</span>([randomOBJ class]),randomOBJ);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//test in stack when stack is full</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">NSInteger</span> i=<span class="number">0</span>; i&lt;<span class="number">100</span>; i++) &#123;</span><br><span class="line">        <span class="built_in">NSObject</span> * randomOBJ = [vector objectAtIndex:(arc4random()%vector.count)];</span><br><span class="line">        <span class="built_in">BOOL</span> inStackSuccess =[stackToBeTest inStack:[randomOBJ <span class="keyword">copy</span>]];</span><br><span class="line">        <span class="built_in">NSString</span> * status = inStackSuccess?<span class="string">@"success"</span>:<span class="string">@"fail"</span>;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"inStack:%@,object:【%@】%@"</span>,status,<span class="built_in">NSStringFromClass</span>([randomOBJ class]),randomOBJ);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/03/30/stack-gen/" data-id="cimegwebo00044i4d7f6z90te" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/03/30/stack-usage/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/29/gitsshconfig/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">多个ras_id配置.ssh的config文件</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/03/30/stack-usage/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/30/stack-gen/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/29/gitsshconfig/">多个ras_id配置.ssh的config文件</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/29/hexothemeconfig/">hexothemeconfig</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/29/cname-githubio/">配置github.io域名指向</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 看头像<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

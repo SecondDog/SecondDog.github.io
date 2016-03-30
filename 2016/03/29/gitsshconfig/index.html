@@ -3,17 +3,60 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Archives: 2016/3 | Show me the code</title>
+  <title>多个ras_id配置.ssh的config文件 | Show me the code</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="talk is cheap show me the code">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Show me the code">
-<meta property="og:url" content="http://yoursite.com/archives/2016/03/index.html">
+  <meta name="description" content="在使用ssh方式和git服务器通信的时候 会用到rsa生成公钥，重复生成时默认配置会覆盖掉之前生成的公钥和私钥，这时就需要添加config文件
+#进入.ssh目录
+cd ~/.ssh
+#创建config文件
+vi config
+
+
+添加以下内容
+
+#主机别名 以后在访问的时候一定要用别名来访问
+Host MyGitHost
+#主机名
+HostName github.com
+#你的id
+User l">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多个ras_id配置.ssh的config文件">
+<meta property="og:url" content="http://yoursite.com/2016/03/29/gitsshconfig/index.html">
 <meta property="og:site_name" content="Show me the code">
-<meta property="og:description" content="talk is cheap show me the code">
+<meta property="og:description" content="在使用ssh方式和git服务器通信的时候 会用到rsa生成公钥，重复生成时默认配置会覆盖掉之前生成的公钥和私钥，这时就需要添加config文件
+#进入.ssh目录
+cd ~/.ssh
+#创建config文件
+vi config
+
+
+添加以下内容
+
+#主机别名 以后在访问的时候一定要用别名来访问
+Host MyGitHost
+#主机名
+HostName github.com
+#你的id
+User l">
+<meta property="og:updated_time" content="2016-03-29T10:55:26.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Show me the code">
-<meta name="twitter:description" content="talk is cheap show me the code">
+<meta name="twitter:title" content="多个ras_id配置.ssh的config文件">
+<meta name="twitter:description" content="在使用ssh方式和git服务器通信的时候 会用到rsa生成公钥，重复生成时默认配置会覆盖掉之前生成的公钥和私钥，这时就需要添加config文件
+#进入.ssh目录
+cd ~/.ssh
+#创建config文件
+vi config
+
+
+添加以下内容
+
+#主机别名 以后在访问的时候一定要用别名来访问
+Host MyGitHost
+#主机名
+HostName github.com
+#你的id
+User l">
   
     <link rel="alternate" href="/atom.xml" title="Show me the code" type="application/atom+xml">
   
@@ -66,122 +109,89 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/03/30/stack-usage/" class="archive-article-date">
-  <time datetime="2016-03-30T05:55:18.000Z" itemprop="datePublished">Mar 30</time>
+        <section id="main"><article id="post-gitsshconfig" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/03/29/gitsshconfig/" class="article-date">
+  <time datetime="2016-03-29T09:16:18.000Z" itemprop="datePublished">2016-03-29</time>
 </a>
-      
-    </header>
+    
   </div>
-</article>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/03/30/stack-gen/" class="archive-article-date">
-  <time datetime="2016-03-30T05:38:40.000Z" itemprop="datePublished">Mar 30</time>
-</a>
-      
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/03/29/gitsshconfig/" class="archive-article-date">
-  <time datetime="2016-03-29T09:16:18.000Z" itemprop="datePublished">Mar 29</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/29/gitsshconfig/">多个ras_id配置.ssh的config文件</a>
+    <h1 class="article-title" itemprop="name">
+      多个ras_id配置.ssh的config文件
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/03/29/hexothemeconfig/" class="archive-article-date">
-  <time datetime="2016-03-29T09:15:41.000Z" itemprop="datePublished">Mar 29</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/29/hexothemeconfig/">hexothemeconfig</a>
-    </h1>
-  
+        <p>在使用ssh方式和git服务器通信的时候 会用到rsa生成公钥，重复生成时默认配置会覆盖掉之前生成的公钥和私钥，这时就需要添加config文件</p>
+<pre><code>#进入.ssh目录
+cd ~/.ssh
+#创建config文件
+vi config
+<code></code></code></pre>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/03/29/cname-githubio/" class="archive-article-date">
-  <time datetime="2016-03-29T07:02:59.000Z" itemprop="datePublished">Mar 29</time>
-</a>
+<p>添加以下内容</p>
+<pre><code>
+#主机别名 以后在访问的时候一定要用别名来访问
+Host MyGitHost
+#主机名
+HostName github.com
+#你的id
+User last_afc@163.com
+#端口号
+Port 22
+#公钥文件位置
+IdentityFile ~/.ssh/id_rsa
+
+###公司的git配置
+Host MyDuomiGit
+HostName 192.168.200.222
+User git
+Port 2222
+IdentityFile ~/.ssh/ziyu.duomi.rsa
+</code></pre>
+
+
+
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/29/cname-githubio/">配置github.io域名指向</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2016/03/28/hello-world/" class="archive-article-date">
-  <time datetime="2016-03-28T09:11:23.000Z" itemprop="datePublished">Mar 28</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/03/29/gitsshconfig/" data-id="cimegwebl00034i4dfmd0ks2t" class="article-share-link">Share</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/03/28/hello-world/">基于github.io和hexo搭建技术博客</a>
-    </h1>
-  
-
-    </header>
+      
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/03/30/stack-gen/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/03/29/hexothemeconfig/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">hexothemeconfig</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-  
-    </div></section>
-  
 
 </section>
         
