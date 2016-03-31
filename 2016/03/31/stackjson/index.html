@@ -3,17 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Show me the code</title>
+  <title>OC数据结构（三.1）：用栈和状态机完成JSON解析 | Show me the code</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="talk is cheap show me the code">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Show me the code">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="序文章的灵感及主要解析算法来自于一位前辈的博客如何编写一个JSON解析器以及上篇中的括号匹配算法，我用OC实现了解析算法，由于前辈博客中的语言比较简练，对算法没有过多描述，所以我决定开一篇博客去详细描述过程。OC版本的实现代码已经上传Github
+JSONjson(JavaScript Object Notation)我自己的翻译是JavaScript对象标记法。这里是官网的介绍。感觉中文的翻译好">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OC数据结构（三.1）：用栈和状态机完成JSON解析">
+<meta property="og:url" content="http://yoursite.com/2016/03/31/stackjson/index.html">
 <meta property="og:site_name" content="Show me the code">
-<meta property="og:description" content="talk is cheap show me the code">
+<meta property="og:description" content="序文章的灵感及主要解析算法来自于一位前辈的博客如何编写一个JSON解析器以及上篇中的括号匹配算法，我用OC实现了解析算法，由于前辈博客中的语言比较简练，对算法没有过多描述，所以我决定开一篇博客去详细描述过程。OC版本的实现代码已经上传Github
+JSONjson(JavaScript Object Notation)我自己的翻译是JavaScript对象标记法。这里是官网的介绍。感觉中文的翻译好">
+<meta property="og:updated_time" content="2016-03-31T09:39:03.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Show me the code">
-<meta name="twitter:description" content="talk is cheap show me the code">
+<meta name="twitter:title" content="OC数据结构（三.1）：用栈和状态机完成JSON解析">
+<meta name="twitter:description" content="序文章的灵感及主要解析算法来自于一位前辈的博客如何编写一个JSON解析器以及上篇中的括号匹配算法，我用OC实现了解析算法，由于前辈博客中的语言比较简练，对算法没有过多描述，所以我决定开一篇博客去详细描述过程。OC版本的实现代码已经上传Github
+JSONjson(JavaScript Object Notation)我自己的翻译是JavaScript对象标记法。这里是官网的介绍。感觉中文的翻译好">
   
     <link rel="alternate" href="/atom.xml" title="Show me the code" type="application/atom+xml">
   
@@ -66,9 +70,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-stackjson" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-stackjson" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/03/31/stackjson/" class="article-date">
   <time datetime="2016-03-31T05:50:57.000Z" itemprop="datePublished">2016-03-31</time>
@@ -81,8 +83,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/31/stackjson/">OC数据结构（三.1）：用栈和状态机完成JSON解析</a>
+    <h1 class="article-title" itemprop="name">
+      OC数据结构（三.1）：用栈和状态机完成JSON解析
     </h1>
   
 
@@ -290,276 +292,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-stack-usage" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/03/30/stack-usage/" class="article-date">
-  <time datetime="2016-03-30T05:55:18.000Z" itemprop="datePublished">2016-03-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/30/stack-usage/">OC数据结构（二）：栈的用途</a>
-    </h1>
+    <a href="/2016/03/30/stack-usage/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">OC数据结构（二）：栈的用途</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="从LeetCode的第20题说起"><a href="#从LeetCode的第20题说起" class="headerlink" title="从LeetCode的第20题说起"></a>从LeetCode的第20题说起</h2><blockquote>
-<p>Given a string containing just the characters ‘(‘, ‘)’, ‘{‘, ‘}’, ‘[‘ and ‘]’, determine if the input string is valid.<br>The brackets must close in the correct order, “()” and “()[]{}” are all valid but “(]” and “([)]” are not.<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/03/30/stack-usage/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/03/30/stack-usage/" data-id="cimg3b0070005804dothrcphx" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-stack-gen" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/03/30/stack-gen/" class="article-date">
-  <time datetime="2016-03-30T05:38:40.000Z" itemprop="datePublished">2016-03-30</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/30/stack-gen/">OC数据结构（二）：栈的生成</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>栈（stack）作为数据结构里的最基础，最简单，最经典的模型，从我们一上学开始就被一再提起。C++的STL更是把栈作为一种基础的模板直接封装在其框架之内了，java语言也有StackUtil。但是OC中没有关于栈的容器，所以我实现了NSStack类，内部包装一个数组作为容器。初始化的时候初始化内部的数组，入栈就是在数组末尾添加元素，出栈就是从获取数组的最后一个元素，栈空就是数组count为0 下面是栈的行为定义<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/03/30/stack-gen/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/03/30/stack-gen/" data-id="cimg3b0060004804dlctz8an8" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-gitsshconfig" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/03/29/gitsshconfig/" class="article-date">
-  <time datetime="2016-03-29T09:16:18.000Z" itemprop="datePublished">2016-03-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/29/gitsshconfig/">多个ras_id配置.ssh的config文件</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>在使用ssh方式和git服务器通信的时候 会用到rsa生成公钥，重复生成时默认配置会覆盖掉之前生成的公钥和私钥，这时就需要添加config文件</p>
-<pre><code>#进入.ssh目录
-cd ~/.ssh
-#创建config文件
-vi config
-<code></code></code></pre>
-
-<p>添加以下内容</p>
-<pre><code>
-#主机别名 以后在访问的时候一定要用别名来访问
-Host MyGitHost
-#主机名
-HostName github.com
-#你的id
-User last_afc@163.com
-#端口号
-Port 22
-#公钥文件位置
-IdentityFile ~/.ssh/id_rsa
-
-###公司的git配置
-Host MyDuomiGit
-HostName 192.168.200.222
-User git
-Port 2222
-IdentityFile ~/.ssh/ziyu.duomi.rsa
-</code></pre>
-
-
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/03/29/gitsshconfig/" data-id="cimg3azzx0001804d0uddew9r" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hexothemeconfig" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/03/29/hexothemeconfig/" class="article-date">
-  <time datetime="2016-03-29T09:15:41.000Z" itemprop="datePublished">2016-03-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/29/hexothemeconfig/">hexothemeconfig</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/03/29/hexothemeconfig/" data-id="cimg3b0040003804dxquczkpv" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-cname-githubio" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/03/29/cname-githubio/" class="article-date">
-  <time datetime="2016-03-29T07:02:59.000Z" itemprop="datePublished">2016-03-29</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/29/cname-githubio/">配置github.io域名指向</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>###如何配置自己的gihub.io的域名指向。<br>进入用hexo生成的本地my_blog_name文件夹<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/03/29/cname-githubio/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/03/29/cname-githubio/" data-id="cimg3azzs0000804dygbyehu8" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/03/28/hello-world/" class="article-date">
-  <time datetime="2016-03-28T09:11:23.000Z" itemprop="datePublished">2016-03-28</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/28/hello-world/">基于github.io和hexo搭建技术博客</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="github配置"><a href="#github配置" class="headerlink" title="github配置"></a>github配置</h2><p>github提供了<a href="https://pages.github.com/" >pages</a>功能。能够生成属于你自己的站点。<br>登录自己的github，新建一个仓库，仓库的名字必须和你的github用户名一致<br>
-        
-          <p class="article-more-link">
-            <a href="/2016/03/28/hello-world/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/03/28/hello-world/" data-id="cimg3b0000002804dln7g8e64" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 </section>
         

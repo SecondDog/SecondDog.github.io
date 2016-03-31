@@ -3,21 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Show me the code</title>
+  <title>OC数据结构（二）：栈的用途 | Show me the code</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title:OC数据结构（二）：栈的用途从LeetCode的第20题说起
-Given a string containing just the characters ‘(‘, ‘)’, ‘{‘, ‘}’, ‘[‘ and ‘]’, determine if the input string is valid.The brackets must close in the correct order,">
+  <meta name="description" content="从LeetCode的第20题说起
+Given a string containing just the characters ‘(‘, ‘)’, ‘{‘, ‘}’, ‘[‘ and ‘]’, determine if the input string is valid.The brackets must close in the correct order, “()” and “()[]{}” a">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Show me the code">
+<meta property="og:title" content="OC数据结构（二）：栈的用途">
 <meta property="og:url" content="http://yoursite.com/2016/03/30/stack-usage/index.html">
 <meta property="og:site_name" content="Show me the code">
-<meta property="og:description" content="title:OC数据结构（二）：栈的用途从LeetCode的第20题说起
-Given a string containing just the characters ‘(‘, ‘)’, ‘{‘, ‘}’, ‘[‘ and ‘]’, determine if the input string is valid.The brackets must close in the correct order,">
-<meta property="og:updated_time" content="2016-03-30T06:23:50.000Z">
+<meta property="og:description" content="从LeetCode的第20题说起
+Given a string containing just the characters ‘(‘, ‘)’, ‘{‘, ‘}’, ‘[‘ and ‘]’, determine if the input string is valid.The brackets must close in the correct order, “()” and “()[]{}” a">
+<meta property="og:updated_time" content="2016-03-31T05:49:03.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Show me the code">
-<meta name="twitter:description" content="title:OC数据结构（二）：栈的用途从LeetCode的第20题说起
-Given a string containing just the characters ‘(‘, ‘)’, ‘{‘, ‘}’, ‘[‘ and ‘]’, determine if the input string is valid.The brackets must close in the correct order,">
+<meta name="twitter:title" content="OC数据结构（二）：栈的用途">
+<meta name="twitter:description" content="从LeetCode的第20题说起
+Given a string containing just the characters ‘(‘, ‘)’, ‘{‘, ‘}’, ‘[‘ and ‘]’, determine if the input string is valid.The brackets must close in the correct order, “()” and “()[]{}” a">
   
     <link rel="alternate" href="/atom.xml" title="Show me the code" type="application/atom+xml">
   
@@ -80,9 +80,19 @@ Given a string containing just the characters ‘(‘, ‘)’, ‘{‘, ‘}’
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      OC数据结构（二）：栈的用途
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="title-OC数据结构（二）：栈的用途"><a href="#title-OC数据结构（二）：栈的用途" class="headerlink" title="title:OC数据结构（二）：栈的用途"></a>title:OC数据结构（二）：栈的用途</h2><h2 id="从LeetCode的第20题说起"><a href="#从LeetCode的第20题说起" class="headerlink" title="从LeetCode的第20题说起"></a>从LeetCode的第20题说起</h2><blockquote>
+        <h2 id="从LeetCode的第20题说起"><a href="#从LeetCode的第20题说起" class="headerlink" title="从LeetCode的第20题说起"></a>从LeetCode的第20题说起</h2><blockquote>
 <p>Given a string containing just the characters ‘(‘, ‘)’, ‘{‘, ‘}’, ‘[‘ and ‘]’, determine if the input string is valid.<br>The brackets must close in the correct order, “()” and “()[]{}” are all valid but “(]” and “([)]” are not.<br><a id="more"></a><br>大概翻译一下：<br>输入一个只包含{}()[]几种括号的字符串，判断字符串是否合法。合法的条件你懂的，就是括号都能对得上。例（）and (){}[]都合法 ，(] 和 ([)]不合法</p>
 </blockquote>
 <h2 id="show-me-the-code"><a href="#show-me-the-code" class="headerlink" title="show me the code"></a>show me the code</h2><p>这道题目用栈来做简直最得心应手了算法的基本描述如下:<br><strong>遇到左括就入栈，遇到右括号就从栈里pop出一个左括号并判断是否匹配。一直持续这个过程就OK了</strong><br>先来伪代码</p>
@@ -94,7 +104,7 @@ Given a string containing just the characters ‘(‘, ‘)’, ‘{‘, ‘}’
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/03/30/stack-usage/" data-id="cimegwebp00054i4du432nfux" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/03/30/stack-usage/" data-id="cimg3b0070005804dothrcphx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -103,10 +113,19 @@ Given a string containing just the characters ‘(‘, ‘)’, ‘{‘, ‘}’
     
 <nav id="article-nav">
   
+    <a href="/2016/03/31/stackjson/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          OC数据结构（三.1）：用栈和状态机完成JSON解析
+        
+      </div>
+    </a>
+  
   
     <a href="/2016/03/30/stack-gen/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title"></div>
+      <div class="article-nav-title">OC数据结构（二）：栈的生成</div>
     </a>
   
 </nav>
@@ -143,11 +162,15 @@ Given a string containing just the characters ‘(‘, ‘)’, ‘{‘, ‘}’
       <ul>
         
           <li>
-            <a href="/2016/03/30/stack-usage/">(no title)</a>
+            <a href="/2016/03/31/stackjson/">OC数据结构（三.1）：用栈和状态机完成JSON解析</a>
           </li>
         
           <li>
-            <a href="/2016/03/30/stack-gen/">(no title)</a>
+            <a href="/2016/03/30/stack-usage/">OC数据结构（二）：栈的用途</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/30/stack-gen/">OC数据结构（二）：栈的生成</a>
           </li>
         
           <li>
@@ -156,10 +179,6 @@ Given a string containing just the characters ‘(‘, ‘)’, ‘{‘, ‘}’
         
           <li>
             <a href="/2016/03/29/hexothemeconfig/">hexothemeconfig</a>
-          </li>
-        
-          <li>
-            <a href="/2016/03/29/cname-githubio/">配置github.io域名指向</a>
           </li>
         
       </ul>

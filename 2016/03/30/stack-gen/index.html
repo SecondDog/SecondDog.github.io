@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Show me the code</title>
+  <title>OC数据结构（二）：栈的生成 | Show me the code</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="title:OC数据结构（一）：栈的生成概述栈（stack）作为数据结构里的最基础，最简单，最经典的模型，从我们一上学开始就被一再提起。C++的STL更是把栈作为一种基础的模板直接封装在其框架之内了，java语言也有StackUtil。但是OC中没有关于栈的容器，所以我实现了NSStack类，内部包装一个数组作为容器。初始化的时候初始化内部的数组，入栈就是在数组末尾添加元素，出栈就是从获取数组的">
+  <meta name="description" content="概述栈（stack）作为数据结构里的最基础，最简单，最经典的模型，从我们一上学开始就被一再提起。C++的STL更是把栈作为一种基础的模板直接封装在其框架之内了，java语言也有StackUtil。但是OC中没有关于栈的容器，所以我实现了NSStack类，内部包装一个数组作为容器。初始化的时候初始化内部的数组，入栈就是在数组末尾添加元素，出栈就是从获取数组的最后一个元素，栈空就是数组count为0">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Show me the code">
+<meta property="og:title" content="OC数据结构（二）：栈的生成">
 <meta property="og:url" content="http://yoursite.com/2016/03/30/stack-gen/index.html">
 <meta property="og:site_name" content="Show me the code">
-<meta property="og:description" content="title:OC数据结构（一）：栈的生成概述栈（stack）作为数据结构里的最基础，最简单，最经典的模型，从我们一上学开始就被一再提起。C++的STL更是把栈作为一种基础的模板直接封装在其框架之内了，java语言也有StackUtil。但是OC中没有关于栈的容器，所以我实现了NSStack类，内部包装一个数组作为容器。初始化的时候初始化内部的数组，入栈就是在数组末尾添加元素，出栈就是从获取数组的">
-<meta property="og:updated_time" content="2016-03-30T06:18:03.000Z">
+<meta property="og:description" content="概述栈（stack）作为数据结构里的最基础，最简单，最经典的模型，从我们一上学开始就被一再提起。C++的STL更是把栈作为一种基础的模板直接封装在其框架之内了，java语言也有StackUtil。但是OC中没有关于栈的容器，所以我实现了NSStack类，内部包装一个数组作为容器。初始化的时候初始化内部的数组，入栈就是在数组末尾添加元素，出栈就是从获取数组的最后一个元素，栈空就是数组count为0">
+<meta property="og:updated_time" content="2016-03-31T05:50:11.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Show me the code">
-<meta name="twitter:description" content="title:OC数据结构（一）：栈的生成概述栈（stack）作为数据结构里的最基础，最简单，最经典的模型，从我们一上学开始就被一再提起。C++的STL更是把栈作为一种基础的模板直接封装在其框架之内了，java语言也有StackUtil。但是OC中没有关于栈的容器，所以我实现了NSStack类，内部包装一个数组作为容器。初始化的时候初始化内部的数组，入栈就是在数组末尾添加元素，出栈就是从获取数组的">
+<meta name="twitter:title" content="OC数据结构（二）：栈的生成">
+<meta name="twitter:description" content="概述栈（stack）作为数据结构里的最基础，最简单，最经典的模型，从我们一上学开始就被一再提起。C++的STL更是把栈作为一种基础的模板直接封装在其框架之内了，java语言也有StackUtil。但是OC中没有关于栈的容器，所以我实现了NSStack类，内部包装一个数组作为容器。初始化的时候初始化内部的数组，入栈就是在数组末尾添加元素，出栈就是从获取数组的最后一个元素，栈空就是数组count为0">
   
     <link rel="alternate" href="/atom.xml" title="Show me the code" type="application/atom+xml">
   
@@ -77,10 +77,19 @@
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      OC数据结构（二）：栈的生成
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <hr>
-<h2 id="title-OC数据结构（一）：栈的生成"><a href="#title-OC数据结构（一）：栈的生成" class="headerlink" title="title:OC数据结构（一）：栈的生成"></a>title:OC数据结构（一）：栈的生成</h2><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>栈（stack）作为数据结构里的最基础，最简单，最经典的模型，从我们一上学开始就被一再提起。C++的STL更是把栈作为一种基础的模板直接封装在其框架之内了，java语言也有StackUtil。但是OC中没有关于栈的容器，所以我实现了NSStack类，内部包装一个数组作为容器。初始化的时候初始化内部的数组，入栈就是在数组末尾添加元素，出栈就是从获取数组的最后一个元素，栈空就是数组count为0 下面是栈的行为定义<br><a id="more"></a></p>
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>栈（stack）作为数据结构里的最基础，最简单，最经典的模型，从我们一上学开始就被一再提起。C++的STL更是把栈作为一种基础的模板直接封装在其框架之内了，java语言也有StackUtil。但是OC中没有关于栈的容器，所以我实现了NSStack类，内部包装一个数组作为容器。初始化的时候初始化内部的数组，入栈就是在数组末尾添加元素，出栈就是从获取数组的最后一个元素，栈空就是数组count为0 下面是栈的行为定义<br><a id="more"></a></p>
 <ul>
 <li>初始化</li>
 <li>入栈</li>
@@ -95,7 +104,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/03/30/stack-gen/" data-id="cimegwebo00044i4d7f6z90te" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/03/30/stack-gen/" data-id="cimg3b0060004804dlctz8an8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -108,7 +117,7 @@
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          (no title)
+          OC数据结构（二）：栈的用途
         
       </div>
     </a>
@@ -153,11 +162,15 @@
       <ul>
         
           <li>
-            <a href="/2016/03/30/stack-usage/">(no title)</a>
+            <a href="/2016/03/31/stackjson/">OC数据结构（三.1）：用栈和状态机完成JSON解析</a>
           </li>
         
           <li>
-            <a href="/2016/03/30/stack-gen/">(no title)</a>
+            <a href="/2016/03/30/stack-usage/">OC数据结构（二）：栈的用途</a>
+          </li>
+        
+          <li>
+            <a href="/2016/03/30/stack-gen/">OC数据结构（二）：栈的生成</a>
           </li>
         
           <li>
@@ -166,10 +179,6 @@
         
           <li>
             <a href="/2016/03/29/hexothemeconfig/">hexothemeconfig</a>
-          </li>
-        
-          <li>
-            <a href="/2016/03/29/cname-githubio/">配置github.io域名指向</a>
           </li>
         
       </ul>
