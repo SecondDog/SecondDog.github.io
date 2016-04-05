@@ -55,9 +55,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -67,6 +67,128 @@
 </header>
       <div class="outer">
         <section id="main">
+  
+    <article id="post-aboutbenchmark" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/04/05/aboutbenchmark/" class="article-date">
+  <time datetime="2016-04-05T09:33:16.000Z" itemprop="datePublished">2016-04-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/04/05/aboutbenchmark/">关于benchmark</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>这个词并不陌生，很多成熟框架的作者都会附带着benchmark。benchmark直译就是评测对比。<br>比如我们想测试对比两个方法的运行速度 通常我们都会在方法的开头和结尾获取绝对时间。例如<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">CFTimeInterval</span> beginTime = <span class="built_in">CACurrentMediaTime</span>();</span><br><span class="line"><span class="comment">//被测试的代码段</span></span><br><span class="line"><span class="built_in">CFTimeInterval</span> endTime =<span class="built_in">CACurrentMediaTime</span>();</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"Time delta:%g"</span>,endTime-beginTime);</span><br></pre></td></tr></table></figure></p>
+<p>不过CoreFoundation提供了一种更优雅的实现方式。不过这个api并不是公开的。但是可以被man到，终端<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">man dispatch_benchmark(3)</span><br></pre></td></tr></table></figure></p>
+<p>由于方法未公开，所以使用前要先声明。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">extern</span> uint64_t dispatch_benchmark(size_t count, <span class="keyword">void</span> (^block)(<span class="keyword">void</span>));</span><br></pre></td></tr></table></figure>
+<h3 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h3><ul>
+<li>block块 需要测试的代码块</li>
+<li>count 被测试代码运行次数</li>
+<li>返回值 被测试代码经过count次迭代所需要的平均时间</li>
+</ul>
+<p>下面我们就用这个方法来测试对比一下4种遍历Array的效率。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSInteger</span> iterationTimes = <span class="number">1000</span>; <span class="comment">//迭代次数</span></span><br><span class="line">        <span class="built_in">NSInteger</span> arrayCount = <span class="number">100000</span>;<span class="comment">//数组大小</span></span><br><span class="line">        <span class="built_in">NSMutableArray</span> * arr = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line">        <span class="keyword">for</span> (<span class="built_in">NSInteger</span> i=<span class="number">0</span>; i&lt;arrayCount; i++) &#123;</span><br><span class="line">            [arr addObject:@(i)];</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//for each 方式</span></span><br><span class="line">        uint64_t t_foreach = dispatch_benchmark(iterationTimes, ^&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">NSInteger</span> i=<span class="number">0</span>; i&lt;arrayCount; i++) &#123;</span><br><span class="line">                <span class="built_in">NSNumber</span> * num = arr[i];</span><br><span class="line">                [num integerValue];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"for each迭代%ld次平均时间 %llu ns"</span>, iterationTimes,t_foreach);</span><br><span class="line">        </span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        <span class="comment">//for in 方式</span></span><br><span class="line">        uint64_t t_forin = dispatch_benchmark(iterationTimes, ^&#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="built_in">NSNumber</span> * num <span class="keyword">in</span> arr) &#123;</span><br><span class="line">                [num integerValue];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"for in迭代%ld次平均时间 %llu ns"</span>, iterationTimes,t_forin);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//block枚举方式</span></span><br><span class="line">        uint64_t t_enu_block = dispatch_benchmark(iterationTimes, ^&#123;</span><br><span class="line">            [arr enumerateObjectsUsingBlock:^(<span class="built_in">NSNumber</span>*  _Nonnull num, <span class="built_in">NSUInteger</span> idx, <span class="built_in">BOOL</span> * _Nonnull stop) &#123;</span><br><span class="line">                [num integerValue];</span><br><span class="line">                ;</span><br><span class="line">            &#125;];</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"enu_block 迭代%ld次平均时间 %llu ns"</span>, iterationTimes,t_enu_block);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//枚举器方式</span></span><br><span class="line">        uint64_t t_enamerator = dispatch_benchmark(iterationTimes, ^&#123;</span><br><span class="line">            <span class="built_in">NSEnumerator</span> * enumerator = [arr objectEnumerator];</span><br><span class="line">            <span class="built_in">NSNumber</span> * num ;</span><br><span class="line">            <span class="keyword">while</span> (num=[enumerator nextObject]) &#123;</span><br><span class="line">                [num integerValue];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"enamerator 迭代%ld次平均时间 %llu ns"</span>, iterationTimes,t_enamerator);</span><br></pre></td></tr></table></figure>
+<p>测试环境</p>
+<ul>
+<li>MacBook Pro（Retina 显示屏，13 英寸，2015 年初期）</li>
+<li>处理器2.7 GHz Intel Core i5</li>
+<li>内存8 GB 1867 MHz DDR3</li>
+<li>图形卡Intel Iris Graphics 6100 1536 MB</li>
+<li>Xcode7.1</li>
+<li>满电量，外置电源</li>
+</ul>
+<p>对于不同容量的数组测试数据如下.单位ns 纳秒。红色字体代表最快</p>
+<table>
+<thead>
+<tr>
+<th>数组容量/方式</th>
+<th>for each</th>
+<th>for in</th>
+<th>enu_block</th>
+<th>enumerator</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><font color="red">56</font></td>
+<td>136</td>
+<td>130</td>
+<td>4207</td>
+</tr>
+<tr>
+<td>10</td>
+<td>614</td>
+<td><font color="red">365</font></td>
+<td>705</td>
+<td>4497</td>
+</tr>
+<tr>
+<td>100</td>
+<td>3056</td>
+<td><font color="red">1870</font></td>
+<td>5061</td>
+<td>6373</td>
+</tr>
+<tr>
+<td>1000</td>
+<td>28080</td>
+<td><font color="red">13874</font></td>
+<td>48845</td>
+<td>33773</td>
+</tr>
+<tr>
+<td>10000</td>
+<td>283182</td>
+<td><font color="red">146055</font></td>
+<td>493017</td>
+<td>272574</td>
+</tr>
+<tr>
+<td>100000</td>
+<td>2767874</td>
+<td><font color="red">1431035</font></td>
+<td>4720343</td>
+<td>2731877</td>
+</tr>
+</tbody>
+</table>
+<p>从上表可以看出 四种遍历方式里，出去第一组数据只有一个的边际情况。其余的都是forin方式最快。其次是for each。最慢的是枚举器。</p>
+<p>测试用例有可能的遗漏</p>
+<ul>
+<li>存里的都是NSNumber对象，不确定NSArray对于所有对象的存储是否一视同仁，对其他特殊的对象的存储是否有优化</li>
+<li>测试工程是Command line tool工程。测试方法写在main函数里，不确定在移动平台的不同cpu架构上的表现。</li>
+<li>最后一组用例的测试的时候cpu占用率一度达到了100%，不确定用例的先后顺序是否对结果有影响。</li>
+</ul>
+<h3 id="！！！枚举器外置声明"><a href="#！！！枚举器外置声明" class="headerlink" title="！！！枚举器外置声明"></a>！！！枚举器外置声明</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//枚举器方式</span></span><br><span class="line"><span class="built_in">NSEnumerator</span> * enumerator_out = [arr objectEnumerator];<span class="comment">//注意这句，不包含在测试代码里。</span></span><br><span class="line">uint64_t t_enamerator_out = dispatch_benchmark(iterationTimes, ^&#123;</span><br><span class="line">    <span class="built_in">NSNumber</span> * num ;</span><br><span class="line">    <span class="keyword">while</span> (num=[enumerator_out nextObject]) &#123;</span><br><span class="line">        [num integerValue];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"enamerator 迭代%ld次平均时间 %llu ns"</span>, iterationTimes,t_enamerator_out);</span><br></pre></td></tr></table></figure>
+<p>把枚举器放到外部的时候，遍历花的时间要远远少于其他几种方式。也就是说多次遍历不可变数组的时候，声明一个全局的枚举器是一种很好的选择。其余情况还是尽量选择平均效率最好的forin方式吧。</p>
+<p><a href="http://nshipster.com/benchmarking/" target="_blank" rel="external">参考文章 benchmarking</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/04/05/aboutbenchmark/" data-id="cimn9hgl20000vo4dyy7sghdf" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
   
     <article id="post-stackjson" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -284,7 +406,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/03/31/stackjson/" data-id="cimg3b0090006804dq0aoqk1f" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/03/31/stackjson/" data-id="cimn9hglz0007vo4d9oatdqow" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -326,7 +448,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/03/30/stack-usage/" data-id="cimg3b0070005804dothrcphx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/03/30/stack-usage/" data-id="cimn9hglu0006vo4dnzfq553l" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -367,7 +489,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/03/30/stack-gen/" data-id="cimg3b0060004804dlctz8an8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/03/30/stack-gen/" data-id="cimn9hgls0004vo4dverxaf4p" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -432,7 +554,7 @@ IdentityFile ~/.ssh/ziyu.duomi.rsa
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/03/29/gitsshconfig/" data-id="cimg3azzx0001804d0uddew9r" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/03/29/gitsshconfig/" data-id="cimn9hglq0003vo4dw0zlkqiw" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -468,7 +590,7 @@ IdentityFile ~/.ssh/ziyu.duomi.rsa
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/03/29/hexothemeconfig/" data-id="cimg3b0040003804dxquczkpv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/03/29/hexothemeconfig/" data-id="cimn9hglt0005vo4dwxm23uwh" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -509,7 +631,7 @@ IdentityFile ~/.ssh/ziyu.duomi.rsa
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/03/29/cname-githubio/" data-id="cimg3azzs0000804dygbyehu8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/03/29/cname-githubio/" data-id="cimn9hglj0001vo4d4dozwfaf" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -550,7 +672,7 @@ IdentityFile ~/.ssh/ziyu.duomi.rsa
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/03/28/hello-world/" data-id="cimg3b0000002804dln7g8e64" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2016/03/28/hello-world/" data-id="cimn9hglm0002vo4daxits3fi" class="article-share-link">Partager</a>
       
       
     </footer>
@@ -577,7 +699,7 @@ IdentityFile ~/.ssh/ziyu.duomi.rsa
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">March 2016</a></li></ul>
     </div>
   </div>
 
@@ -585,9 +707,13 @@ IdentityFile ~/.ssh/ziyu.duomi.rsa
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2016/04/05/aboutbenchmark/">关于benchmark</a>
+          </li>
         
           <li>
             <a href="/2016/03/31/stackjson/">OC数据结构（三.1）：用栈和状态机完成JSON解析</a>
@@ -605,10 +731,6 @@ IdentityFile ~/.ssh/ziyu.duomi.rsa
             <a href="/2016/03/29/gitsshconfig/">多个ras_id配置.ssh的config文件</a>
           </li>
         
-          <li>
-            <a href="/2016/03/29/hexothemeconfig/">hexothemeconfig</a>
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -622,7 +744,7 @@ IdentityFile ~/.ssh/ziyu.duomi.rsa
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 看头像<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
