@@ -5,19 +5,16 @@
   
   <title>OC数据结构（三.1）：用栈和状态机完成JSON解析 | Show me the code</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="序文章的灵感及主要解析算法来自于一位前辈的博客如何编写一个JSON解析器以及上篇中的括号匹配算法，我用OC实现了解析算法，由于前辈博客中的语言比较简练，对算法没有过多描述，所以我决定开一篇博客去详细描述过程。OC版本的实现代码已经上传Github
-JSONjson(JavaScript Object Notation)我自己的翻译是JavaScript对象标记法。这里是官网的介绍。感觉中文的翻译好">
+  <meta name="description" content="序文章的灵感及主要解析算法来自于一位前辈的博客如何编写一个JSON解析器以及上篇中的括号匹配算法，我用OC实现了解析算法，由于前辈博客中的语言比较简练，对算法没有过多描述，所以我决定开一篇博客去详细描述过程。OC版本的实现代码已经上传Github">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OC数据结构（三.1）：用栈和状态机完成JSON解析">
 <meta property="og:url" content="http://yoursite.com/2016/03/31/stackjson/index.html">
 <meta property="og:site_name" content="Show me the code">
-<meta property="og:description" content="序文章的灵感及主要解析算法来自于一位前辈的博客如何编写一个JSON解析器以及上篇中的括号匹配算法，我用OC实现了解析算法，由于前辈博客中的语言比较简练，对算法没有过多描述，所以我决定开一篇博客去详细描述过程。OC版本的实现代码已经上传Github
-JSONjson(JavaScript Object Notation)我自己的翻译是JavaScript对象标记法。这里是官网的介绍。感觉中文的翻译好">
-<meta property="og:updated_time" content="2016-03-31T09:39:03.000Z">
+<meta property="og:description" content="序文章的灵感及主要解析算法来自于一位前辈的博客如何编写一个JSON解析器以及上篇中的括号匹配算法，我用OC实现了解析算法，由于前辈博客中的语言比较简练，对算法没有过多描述，所以我决定开一篇博客去详细描述过程。OC版本的实现代码已经上传Github">
+<meta property="og:updated_time" content="2016-04-06T01:19:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OC数据结构（三.1）：用栈和状态机完成JSON解析">
-<meta name="twitter:description" content="序文章的灵感及主要解析算法来自于一位前辈的博客如何编写一个JSON解析器以及上篇中的括号匹配算法，我用OC实现了解析算法，由于前辈博客中的语言比较简练，对算法没有过多描述，所以我决定开一篇博客去详细描述过程。OC版本的实现代码已经上传Github
-JSONjson(JavaScript Object Notation)我自己的翻译是JavaScript对象标记法。这里是官网的介绍。感觉中文的翻译好">
+<meta name="twitter:description" content="序文章的灵感及主要解析算法来自于一位前辈的博客如何编写一个JSON解析器以及上篇中的括号匹配算法，我用OC实现了解析算法，由于前辈博客中的语言比较简练，对算法没有过多描述，所以我决定开一篇博客去详细描述过程。OC版本的实现代码已经上传Github">
   
     <link rel="alternate" href="/atom.xml" title="Show me the code" type="application/atom+xml">
   
@@ -59,9 +56,9 @@ JSONjson(JavaScript Object Notation)我自己的翻译是JavaScript对象标记�
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -93,6 +90,7 @@ JSONjson(JavaScript Object Notation)我自己的翻译是JavaScript对象标记�
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>文章的灵感及主要解析算法来自于一位前辈的博客<a href="http://www.liaoxuefeng.com/article/0014211269349633dda29ee3f29413c91fa65c372585f23000" target="_blank" rel="external">如何编写一个JSON解析器</a>以及上篇中的<a href="http://cocoa1024.com/2016/03/30/stack-usage/#more" target="_blank" rel="external">括号匹配算法</a>，我用OC实现了解析算法，由于前辈博客中的语言比较简练，对算法没有过多描述，所以我决定开一篇博客去详细描述过程。OC版本的实现代码已经上传<a href="https://github.com/SecondDog/SlowJsonParser" target="_blank" rel="external">Github</a></p>
+<a id="more"></a>
 <h2 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h2><p>json(JavaScript Object Notation)<strong>我自己的翻译是JavaScript对象标记法</strong>。<a href="http://www.json.org/json-zh.html" target="_blank" rel="external">这里是官网的介绍</a>。感觉中文的翻译好生硬，为了文章后篇的顺利阅读，我简要归纳一下。</p>
 <h3 id="JSON中的控制字符"><a href="#JSON中的控制字符" class="headerlink" title="JSON中的控制字符"></a>JSON中的控制字符</h3><ul>
 <li>{ 键-值对容器（A collection of name/value pairs）的开始</li>
@@ -278,7 +276,7 @@ JSONjson(JavaScript Object Notation)我自己的翻译是JavaScript对象标记�
 </table>
 <h3 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h3><p>第一行第一列,如果当前token状态为字典开始状态，那么他可以期待字典结束状态因为{}是可以构成合法json的，<br>第一行的第三列 如果期待数组开始 {[那么这种情况明显是非法的 因为没有key。<br>所以根据上面的表格我们可以构造出token的枚举和(期待)状态的枚举，我们需要用一个全局变量在类内记录对应的token以及根据当前的期待值构造出下次的可期待状态。<br>代码如下</p>
 <h3 id="token类型的枚举"><a href="#token类型的枚举" class="headerlink" title="token类型的枚举"></a>token类型的枚举</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span>:<span class="built_in">NSInteger</span>&#123;</span><br><span class="line">    TokenTypeEndDocument, <span class="comment">//结尾</span></span><br><span class="line">    TokenTypeBeginDict, <span class="comment">//&#123;</span></span><br><span class="line">    TokenTypeEndDict, <span class="comment">//&#125;</span></span><br><span class="line">    TokenTypeBeginArray,<span class="comment">//[</span></span><br><span class="line">    TokenTypeEndArray,<span class="comment">//]</span></span><br><span class="line">    TokenTypeSEPColon,<span class="comment">//:</span></span><br><span class="line">    TokenTypeSEPComma,<span class="comment">//,</span></span><br><span class="line">    TokenTypeString,<span class="comment">//string</span></span><br><span class="line">    TokenTypeBoolean,<span class="comment">//bool</span></span><br><span class="line">    TokenTypeNumber,<span class="comment">//number</span></span><br><span class="line">    TokenTypeNull,<span class="comment">//null</span></span><br><span class="line">    </span><br><span class="line">    TokenTypeError,</span><br><span class="line">&#125;TokenType;</span><br></pre></td></tr></table></figure>
-<h3 id="状态的枚举"><a href="#状态的枚举" class="headerlink" title="状态的枚举"></a>状态的枚举</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span>:<span class="built_in">NSInteger</span>&#123;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span>:<span class="built_in">NSInteger</span> &#123;</span><br><span class="line">    STATUS_EXPECT_BEGIN_DICTIONARY=<span class="number">1</span>&lt;&lt;<span class="number">0</span>,</span><br><span class="line">    STATUS_EXPECT_END_DICTIONARY=<span class="number">1</span>&lt;&lt;<span class="number">1</span>,</span><br><span class="line">    STATUS_EXPECT_BEGIN_ARRAY=<span class="number">1</span>&lt;&lt;<span class="number">2</span>,</span><br><span class="line">    STATUS_EXPECT_END_ARRAY=<span class="number">1</span>&lt;&lt;<span class="number">3</span>,</span><br><span class="line">    STATUS_EXPECT_SINGLE_VALUE=<span class="number">1</span>&lt;&lt;<span class="number">4</span>,</span><br><span class="line">    STATUS_EXPECT_ARRAY_VALUE=<span class="number">1</span>&lt;&lt;<span class="number">5</span>,</span><br><span class="line">    STATUS_EXPECT_DICTIONARY_KEY=<span class="number">1</span>&lt;&lt;<span class="number">6</span>,</span><br><span class="line">    STATUS_EXPECT_DICTIONARY_VALUE=<span class="number">1</span>&lt;&lt;<span class="number">7</span>,</span><br><span class="line">    STATUS_EXPECT_COLON=<span class="number">1</span>&lt;&lt;<span class="number">8</span>,</span><br><span class="line">    STATUS_EXPECT_COMMA=<span class="number">1</span>&lt;&lt;<span class="number">9</span>,</span><br><span class="line">    STATUS_EXPECT_END_DOCUMENT=<span class="number">1</span>&lt;&lt;<span class="number">10</span>,</span><br><span class="line">&#125;STATUS_EXPECT_;</span><br><span class="line">&#125;TokenType;</span><br></pre></td></tr></table></figure>
+<h3 id="状态的枚举"><a href="#状态的枚举" class="headerlink" title="状态的枚举"></a>状态的枚举</h3><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">enum</span>:<span class="built_in">NSInteger</span> &#123;</span><br><span class="line">    STATUS_EXPECT_BEGIN_DICTIONARY=<span class="number">1</span>&lt;&lt;<span class="number">0</span>,</span><br><span class="line">    STATUS_EXPECT_END_DICTIONARY=<span class="number">1</span>&lt;&lt;<span class="number">1</span>,</span><br><span class="line">    STATUS_EXPECT_BEGIN_ARRAY=<span class="number">1</span>&lt;&lt;<span class="number">2</span>,</span><br><span class="line">    STATUS_EXPECT_END_ARRAY=<span class="number">1</span>&lt;&lt;<span class="number">3</span>,</span><br><span class="line">    STATUS_EXPECT_SINGLE_VALUE=<span class="number">1</span>&lt;&lt;<span class="number">4</span>,</span><br><span class="line">    STATUS_EXPECT_ARRAY_VALUE=<span class="number">1</span>&lt;&lt;<span class="number">5</span>,</span><br><span class="line">    STATUS_EXPECT_DICTIONARY_KEY=<span class="number">1</span>&lt;&lt;<span class="number">6</span>,</span><br><span class="line">    STATUS_EXPECT_DICTIONARY_VALUE=<span class="number">1</span>&lt;&lt;<span class="number">7</span>,</span><br><span class="line">    STATUS_EXPECT_COLON=<span class="number">1</span>&lt;&lt;<span class="number">8</span>,</span><br><span class="line">    STATUS_EXPECT_COMMA=<span class="number">1</span>&lt;&lt;<span class="number">9</span>,</span><br><span class="line">    STATUS_EXPECT_END_DOCUMENT=<span class="number">1</span>&lt;&lt;<span class="number">10</span>,</span><br><span class="line">&#125;STATUS_EXPECT_;</span><br></pre></td></tr></table></figure>
 <p>状态之所以要带上位移是因为状态是可以组合存在的，另外还需要一个函数辅助去判断是组合值中是否包含某种状态。其实就是位操作的一个小技巧。</p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">JSONParser</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    STATUS_EXPECT_ _status;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">JSONParser</span></span></span><br><span class="line"></span><br><span class="line">-(<span class="built_in">BOOL</span>)_hasStatus:(STATUS_EXPECT_)status</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> (_status&amp;status)!=<span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>先烂尾，明天写tokenReader</p>
@@ -286,7 +284,7 @@ JSONjson(JavaScript Object Notation)我自己的翻译是JavaScript对象标记�
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/03/31/stackjson/" data-id="cimn9hglz0007vo4d9oatdqow" class="article-share-link">Partager</a>
+      <a data-url="http://yoursite.com/2016/03/31/stackjson/" data-id="cimo64u130007jdfyr6ejdcl4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -296,7 +294,7 @@ JSONjson(JavaScript Object Notation)我自己的翻译是JavaScript对象标记�
 <nav id="article-nav">
   
     <a href="/2016/04/05/aboutbenchmark/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           关于benchmark
@@ -306,7 +304,7 @@ JSONjson(JavaScript Object Notation)我自己的翻译是JavaScript对象标记�
   
   
     <a href="/2016/03/30/stack-usage/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">OC数据结构（二）：栈的用途</div>
     </a>
   
@@ -339,7 +337,7 @@ JSONjson(JavaScript Object Notation)我自己的翻译是JavaScript对象标记�
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -356,7 +354,7 @@ JSONjson(JavaScript Object Notation)我自己的翻译是JavaScript对象标记�
           </li>
         
           <li>
-            <a href="/2016/03/30/stack-gen/">OC数据结构（二）：栈的生成</a>
+            <a href="/2016/03/30/stack-gen/">OC数据结构（一）：栈的生成</a>
           </li>
         
           <li>
@@ -376,7 +374,7 @@ JSONjson(JavaScript Object Notation)我自己的翻译是JavaScript对象标记�
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2016 看头像<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
